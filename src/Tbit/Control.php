@@ -448,13 +448,14 @@ class Control implements ControlInterface
 
             if ($isSync) {
                 //是否获取相应
-                $redis = $this->redis;
+//                $redis = $this->redis;
                 $response = false;
 
                 for ($i = 0; $i <= 30; $i++) {
                     sleep(1);
                     if ($this->isDev) var_dump($i);
-                    $data = $redis->get(BaseMap::CACHE_KEY . ':' . $msgId);
+                    $data = $this->bikeStatusSync->getBikeBoxInfo( ':' . $msgId);
+//                    $data = $redis->get(BaseMap::CACHE_KEY . ':' . $msgId);
                     if ($data) {
                         $response = $this->decodeData($data);
                         break;
