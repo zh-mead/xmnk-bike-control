@@ -431,7 +431,7 @@ class Control implements ControlInterface
      * @return bool
      * User: Mead
      */
-    private function send($box_no, $msg, $isSync = -1, $msgId = '')
+    private function send($box_no, $msg, $isSync = -1, $msgId = false)
     {
         Gateway::$registerAddress = $this->registerAddress;
         if (!Gateway::isUidOnline($box_no)) return false;
@@ -448,14 +448,12 @@ class Control implements ControlInterface
 
             if ($isSync) {
                 //是否获取相应
-//                $redis = $this->redis;
                 $response = false;
 
                 for ($i = 0; $i <= 30; $i++) {
                     sleep(1);
                     if ($this->isDev) var_dump($i);
                     $data = $this->bikeStatusSync->getBikeBoxInfo(':' . $msgId);
-//                    $data = $redis->get(BaseMap::CACHE_KEY . ':' . $msgId);
                     if ($data) {
                         $response = $this->decodeData($data);
                         break;
