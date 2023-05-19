@@ -540,14 +540,12 @@ class Control implements ControlInterface
             Gateway::sendToUid($box_no, hex2bin($msg));
             if ($isSync) {
                 //是否获取相应
-//                $redis = $this->redis;
                 $response = false;
 
                 for ($i = 0; $i <= 30; $i++) {
                     sleep(1);
                     if ($this->isDev) var_dump($i . "==>cmd:{$box_no}:{$msg_id}");
 
-//                    $data = $redis->get(BaseMap::CACHE_KEY . ":cmd:{$box_no}:{$msg_id}");
                     $data = $this->bikeStatusSync->getBikeBoxInfo(":cmd:{$box_no}:{$msg_id}");
                     if ($data) {
                         $response = $this->decodeData($data);
