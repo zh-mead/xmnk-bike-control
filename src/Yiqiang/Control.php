@@ -26,7 +26,7 @@ class Control implements ControlInterface
         $connectionSettings = new ConnectionSettings();
         $connectionSettings = $connectionSettings->setUsername($config['username'])->setPassword($config['password']);
 
-        $mqtt->connect($connectionSettings);
+        $mqtt->connect($connectionSettings, true);
         $this->client = $mqtt;
         $this->groupName = $config['groupName'];
         $this->isSync = $isSync;
