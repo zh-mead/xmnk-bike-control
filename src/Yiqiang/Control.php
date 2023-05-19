@@ -20,7 +20,9 @@ class Control implements ControlInterface
 
     public function __construct($config, $bikeStatusSync, $isSync = false, $userRoleTag = UserRoleMap::USER, $otherConfig = [], $isDev = false)
     {
-        $mqtt = new \PhpMqtt\Client\MqttClient($config['host'], $config['port'], $config['client_id'] . '-' . rand(1, 1000));
+        $nums = 1;
+        if (isset($config['client_nums'])) $nums = $config['client_nums'];
+        $mqtt = new \PhpMqtt\Client\MqttClient($config['host'], $config['port'], $config['client_id'] . '-' . rand(1, $nums));
         $connectionSettings = new ConnectionSettings();
         $connectionSettings = $connectionSettings->setUsername($config['username'])->setPassword($config['password']);
 
