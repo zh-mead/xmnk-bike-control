@@ -425,6 +425,22 @@ class Control implements ControlInterface
     }
 
     /**
+     * 发送自定义数据
+     * @param $box_no
+     * @param $cmd
+     * @param $param
+     * @param $isSync
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function sendCustomParam($box_no, $cmd, $param, $isSync = -1)
+    {
+        $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, $cmd);
+        $str = $this->makeSendMsg($param, $msg_id, CmdMap::CMD_REMOTE_SELECT, false);
+        return $this->send($box_no, $str, $isSync, $msg_id);
+    }
+
+    /**
      * 发送数据
      * @param $box_no
      * @param $msg
