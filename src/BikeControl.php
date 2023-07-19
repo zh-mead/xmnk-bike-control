@@ -38,6 +38,7 @@ use ZhMead\XmnkBikeControl\Common\Maps\UserRoleMap;
  * @method bool setBikeSpeedLimit(string $box_no, mixed $speed, bool $isSync = false)
  * @method mixed getRideBikeOrderInfo(string $box_no)
  * @method mixed byBoxNoGetLocation(string $box_no)
+ * @method mixed sendCustomParam(string $box_no, string $cmd, array $param, bool $isSync = false)
  *
  */
 class BikeControl

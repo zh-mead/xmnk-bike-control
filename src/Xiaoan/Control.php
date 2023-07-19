@@ -503,16 +503,18 @@ class Control implements ControlInterface
         ];
         return $this->send($box_no, $cmd, $param, $isSync);
     }
-
     /**
-     * 打开头盔
+     * 发送自定义数据
      * @param $box_no
-     * @return bool
-     * Author: Mead
+     * @param $cmd
+     * @param $param
+     * @param $isSync
+     * @return bool|mixed
+     * @throws \Exception
      */
-    public function openHelmetLock($box_no, $isSync = -1)
+    public function sendCustomParam($box_no, $cmd, $param, $isSync = -1)
     {
-        return false;
+        return $this->send($box_no, $cmd, $param, $isSync);
     }
 
     /**

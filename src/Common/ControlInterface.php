@@ -238,4 +238,14 @@ interface ControlInterface
      * @return mixed
      */
     public function byBoxNoGetLocation($box_no);
+
+    /**
+     * 自定义发送数据
+     * @param $box_no
+     * @param $cmd
+     * @param $param
+     * @param $isSync
+     * @return mixed
+     */
+    public function sendCustomParam($box_no, $cmd, $param, $isSync);
 }
