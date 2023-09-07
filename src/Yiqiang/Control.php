@@ -518,6 +518,20 @@ class Control implements ControlInterface
     }
 
     /**
+     * 发送自定义数据
+     * @param $box_no
+     * @param $cmd
+     * @param $param
+     * @param $isSync
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function sendCustomParam($box_no, $cmd, $param, $isSync = -1)
+    {
+        return $this->send($box_no, $cmd, $param, $isSync);
+    }
+
+    /**
      * 发送数据包
      * @param $box_no
      * @param $cmd

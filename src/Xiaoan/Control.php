@@ -527,7 +527,7 @@ class Control implements ControlInterface
      * @return bool|mixed
      * @throws \Exception
      */
-    public function send($box_no, $cmd, $param, $isSync = -1)
+    private function send($box_no, $cmd, $param, $isSync = -1)
     {
         $msg_id = self::getRandHex();
         $msg = self::encode($cmd, $param, $msg_id);

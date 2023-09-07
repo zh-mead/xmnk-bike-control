@@ -393,13 +393,13 @@ class Control implements ControlInterface
     /**
      * 查询车的服务器的地址
      * @param $box_no
-     * @return bool
-     * User: Mead
+     * //     * @return bool
+     * //     * User: Mead
      */
-    public function selectBoxServerUrl($box_no)
-    {
-        return $this->selectBoxSetting($box_no, ['DOMAIN'], true);
-    }
+//    public function selectBoxServerUrl($box_no)
+//    {
+//        return $this->selectBoxSetting($box_no, ['DOMAIN'], true);
+//    }sss
 
     /**
      * 配置服务器的地址
@@ -450,7 +450,7 @@ class Control implements ControlInterface
      * @return bool
      * User: Mead
      */
-    public function send($box_no, $msg, $isSync = -1, $msgId = false)
+    private function send($box_no, $msg, $isSync = -1, $msgId = false)
     {
         Gateway::$registerAddress = $this->registerAddress;
         if (!Gateway::isUidOnline($box_no)) return false;
