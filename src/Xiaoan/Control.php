@@ -503,6 +503,7 @@ class Control implements ControlInterface
         ];
         return $this->send($box_no, $cmd, $param, $isSync);
     }
+
     /**
      * 发送自定义数据
      * @param $box_no
@@ -526,7 +527,7 @@ class Control implements ControlInterface
      * @return bool|mixed
      * @throws \Exception
      */
-    private function send($box_no, $cmd, $param, $isSync = -1)
+    public function send($box_no, $cmd, $param, $isSync = -1)
     {
         $msg_id = self::getRandHex();
         $msg = self::encode($cmd, $param, $msg_id);

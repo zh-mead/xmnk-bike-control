@@ -202,8 +202,8 @@ class Control implements ControlInterface
      */
     public function openHelmet($box_no, $isSync = -1)
     {
-        $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CONTROL_REMOTE_OPEN_BACKSEAT);
-        $str = $this->makeSendMsg(CmdMap::CONTROL_REMOTE_OPEN_BACKSEAT, $msg_id);
+        $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CONTROL_REMOTE_OPEN_HUB_LOCK);
+        $str = $this->makeSendMsg(CmdMap::CONTROL_REMOTE_OPEN_HUB_LOCK, $msg_id);
         return $this->send($box_no, $str, $isSync, $msg_id);
     }
 
@@ -216,8 +216,8 @@ class Control implements ControlInterface
      */
     public function closeHelmet($box_no, $isSync = -1)
     {
-        $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CONTROL_REMOTE_CLOSE_BACKSEAT);
-        $str = $this->makeSendMsg(CmdMap::CONTROL_REMOTE_CLOSE_BACKSEAT, $msg_id);
+        $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CONTROL_REMOTE_CLOSE_HUB_LOCK);
+        $str = $this->makeSendMsg(CmdMap::CONTROL_REMOTE_CLOSE_HUB_LOCK, $msg_id);
         return $this->send($box_no, $str, $isSync, $msg_id);
     }
 
@@ -382,6 +382,9 @@ class Control implements ControlInterface
     public function setBoxSetting($box_no, $setting = [], $isSync = -1)
     {
 //        $select = ['PULSE=120', 'FREQ=15', 'VIBFILTERREMINDT=20', 'DFTBLEBONDKEY=NULL', 'BLEKG=1'];
+        foreach ($setting as $s => $v) {
+            if (strpos($v, '=') === false) $setting[$s] = "{$s}={$v}";
+        }
         $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CMD_REMOTE_CONFIG);
         $str = $this->makeSendMsg($setting, $msg_id, CmdMap::CMD_REMOTE_CONFIG, false);
         return $this->send($box_no, $str, $isSync, $msg_id);
@@ -447,7 +450,7 @@ class Control implements ControlInterface
      * @return bool
      * User: Mead
      */
-    private function send($box_no, $msg, $isSync = -1, $msgId = false)
+    public function send($box_no, $msg, $isSync = -1, $msgId = false)
     {
         Gateway::$registerAddress = $this->registerAddress;
         if (!Gateway::isUidOnline($box_no)) return false;
@@ -505,7 +508,7 @@ class Control implements ControlInterface
      * @return string
      * User: Mead
      */
-    private static function makeMsgId($box_no, $type, $cmd)
+    public static function makeMsgId($box_no, $type, $cmd)
     {
         $msg = [
             'no' => $box_no,
@@ -524,7 +527,7 @@ class Control implements ControlInterface
      * @return string
      * User: Mead
      */
-    private function makeSendMsg($controller_cmd, $msgID, $cmd = CmdMap::CMD_REMOTE_CONTROL, $is_hex = true)
+    public function makeSendMsg($controller_cmd, $msgID, $cmd = CmdMap::CMD_REMOTE_CONTROL, $is_hex = true)
     {
         if (!$is_hex) {
             $controller_cmd = bin2hex((implode(';', $controller_cmd) . ';FUJIA'));
