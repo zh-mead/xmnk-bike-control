@@ -393,13 +393,13 @@ class Control implements ControlInterface
     /**
      * 查询车的服务器的地址
      * @param $box_no
-     * //     * @return bool
-     * //     * User: Mead
+     * @return bool
+     * User: Mead
      */
-//    public function selectBoxServerUrl($box_no)
-//    {
-//        return $this->selectBoxSetting($box_no, ['DOMAIN'], true);
-//    }sss
+    public function selectBoxServerUrl($box_no)
+    {
+        return $this->selectBoxSetting($box_no, ['DOMAIN'], true);
+    }
 
     /**
      * 配置服务器的地址
