@@ -398,7 +398,7 @@ class Control implements ControlInterface
      */
     public function selectBoxServerUrl($box_no)
     {
-        return $this->selectBoxSetting($box_no, ['DOMAIN'], true);
+        return $this->selectBoxSetting($box_no, ['DOMAIN']);
     }
 
     /**
