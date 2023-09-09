@@ -453,7 +453,7 @@ class Control implements ControlInterface
     private function send($box_no, $msg, $isSync = -1, $msgId = false)
     {
         Gateway::$registerAddress = $this->registerAddress;
-        if (!Gateway::isUidOnline($box_no)) return false;
+        if (!Gateway::isUidOnline($box_no)) return 0;
 
         if ($isSync === -1) {
             $isSync = $this->isSync;
