@@ -17,6 +17,7 @@ class BikeStatusSync
     const REDIS_RIDE_BIKE_ORDERS_TAG = 'ride_orders:';
     const REDIS_RIDE_BIKE_ORDERS_COUNT_TAG = 'statistics:ride_orders_count';
     const REDIS_RIDE_BIKE_WORKER_ORDERS_TAG = 'ride_orders_worker';
+    const REDIS_RIDE_BIKE_OUT_AREA_TAG = 'bike_out_area_';
 
     public function __construct($redis)
     {
@@ -192,6 +193,18 @@ class BikeStatusSync
         $order = self::$redis->get(self::REDIS_RIDE_BIKE_ORDERS_TAG . $box_no);
         if (!$order) return false;
         return unserialize($order);
+    }
+
+    /**
+     *  获取超区状态
+     * @param $bike_no
+     * @return false|mixed
+     */
+    public function getRideBikeOutAreaStatus($bike_no)
+    {
+        $status = self::$redis->get(self::REDIS_RIDE_BIKE_OUT_AREA_TAG . $bike_no);
+        if (!$status) return false;
+        return $status;
     }
 
     /**
