@@ -82,7 +82,7 @@ class Control implements ControlInterface
     {
         if ($this->isAutoBikeStatusSync) {
             $location = $this->bikeStatusSync->byBoxNoGetLocation($box_no);
-            $this->bikeStatusSync->toBikeWaitRideStatus($box_no, $location['lat'], $location['lng']);
+            $this->bikeStatusSync->toBikeWaitRideStatus($box_no, $location['lng'], $location['lat']);
         }
 
         $cmd = CmdMap::COMMAND_ANTITHEFT_SWITCH;

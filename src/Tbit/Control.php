@@ -70,7 +70,7 @@ class Control implements ControlInterface
     {
         if ($this->isAutoBikeStatusSync) {
             $location = $this->bikeStatusSync->byBoxNoGetLocation($box_no);
-            $this->bikeStatusSync->toBikeWaitRideStatus($box_no, $location['lat'], $location['lng']);
+            $this->bikeStatusSync->toBikeWaitRideStatus($box_no, $location['lng'], $location['lat']);
         }
         $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CONTROL_REMOTE_CLOSE_LOCK);
         $str = $this->makeSendMsg(CmdMap::CONTROL_REMOTE_CLOSE_LOCK, $msg_id);
