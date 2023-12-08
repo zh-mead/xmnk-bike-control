@@ -77,7 +77,7 @@ class Control implements ControlInterface
             'ver' => 1,
             'type' => $cmd,
             'mid' => $msg_id,
-            'time' => time(),
+            'ts' => time(),
             'body' => $param,
         ];
         $msg = json_encode($msg, true);
@@ -121,8 +121,9 @@ class Control implements ControlInterface
      */
     private function getRandStr($length = 32)
     {
-        $str = md5(time());
-        $token = substr($str, 5, $length);
+//        $str = md5(time());
+//        $token = substr($str, 5, $length);
+        $token = rand(1000, 9999);
         return $token;
     }
 
@@ -274,7 +275,9 @@ class Control implements ControlInterface
      */
     public function outAreaPlayVideo($box_no, $isSync = -1)
     {
-        return $this->playVideo($box_no, 11, $isSync);
+        $cmd = CmdMap::CONTROL;
+        $video_cmd = VideoMap::VOICE_SUPER_OPERATIONAL_AREA;
+        return $this->send($box_no, $cmd, $video_cmd, $isSync);
     }
 
     /**
@@ -288,7 +291,7 @@ class Control implements ControlInterface
     {
         $cmd = CmdMap::CONTROL;
         $param = [
-            'file.play' => [
+            'voice.play' => [
                 "seq" => 1,
                 "val" => $video_cmd,
             ]
