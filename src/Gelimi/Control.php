@@ -547,10 +547,14 @@ class Control implements ControlInterface
      */
     public function rebootBox($box_no, $isSync = -1)
     {
-//        $cmd = CmdMap::COMMAND_DEVICE_RESTART;
-//        $param = [];
-//        return $this->send($box_no, $cmd, $param, $isSync);
-        return false;
+        $cmd = CmdMap::CONTROL;
+        $param = [
+            'hw.rst' => [
+                "seq" => 1,
+                "val" => 'iot',
+            ]
+        ];
+        return $this->send($box_no, $cmd, $param, $isSync);
     }
 
     /**
