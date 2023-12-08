@@ -28,7 +28,7 @@ class Control implements ControlInterface
 
         $mqtt->connect($connectionSettings, true);
         $this->client = $mqtt;
-        $this->groupName = $config['groupName'];
+//        $this->groupName = $config['groupName'];
         $this->isSync = $isSync;
         $this->userRoleTag = $userRoleTag;
         $this->bikeStatusSync = $bikeStatusSync;
