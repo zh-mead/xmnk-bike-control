@@ -533,10 +533,13 @@ class Control implements ControlInterface
      */
     public function selectBikeStatus($box_no, $setting = [], $isSync = -1)
     {
-//        $cmd = CmdMap::COMMAND_QUERY_DEVICE_STATUS_INFO;
-//        $param = [];
-//        return self::send($box_no, $cmd, $param, $isSync);
-        return false;
+        $cmd = CmdMap::CONTROL;
+        $param = [
+            'info.qry' => [
+                "seq" => 1,
+            ]
+        ];
+        return self::send($box_no, $cmd, $param, $isSync);
     }
 
     /**
@@ -565,10 +568,13 @@ class Control implements ControlInterface
      */
     public function nowBikeLocation($box_no, $isSync = -1)
     {
-//        $cmd = CmdMap::COMMAND_QUERY_DEVICE_STATUS_INFO;
-//        $param = [];
-//        return $this->send($box_no, $cmd, $param, $isSync);
-        return false;
+        $cmd = CmdMap::CONTROL;
+        $param = [
+            'info.qry' => [
+                "seq" => 1,
+            ]
+        ];
+        return self::send($box_no, $cmd, $param, $isSync);
     }
 
     /**
@@ -579,13 +585,13 @@ class Control implements ControlInterface
      */
     public function nowBikeBatteryMSG($box_no, $isSoc = 0, $isSync = -1)
     {
-//        $cmd = CmdMap::COMMAND_QUERY_DEVICE_STATUS_INFO;
-//        if ($isSoc) {
-//            $cmd = CmdMap::COMMAND_OBTAIN_BMS_REALTIME_DATA;
-//        }
-//        $param = [];
-//        return $this->send($box_no, $cmd, $param, $isSync);
-        return false;
+        $cmd = CmdMap::CONTROL;
+        $param = [
+            'info.qry' => [
+                "seq" => 1,
+            ]
+        ];
+        return self::send($box_no, $cmd, $param, $isSync);
     }
 
     /**
