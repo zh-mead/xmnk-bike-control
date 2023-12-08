@@ -9,4 +9,5 @@ class DeviceMap
     const  WeiKeMu = 'weikemu';
     const  Baimi = 'baimi';
     const  Yiqaing = 'yiqiang';
+    const  Gemili = 'gemili';
 }

@@ -141,6 +141,15 @@ class BikeControl
                 $this->controlKeys[] = DeviceMap::Yiqaing;
             }
         }
+        if (array_key_exists(DeviceMap::Gemili, $gateways)) {
+            try {
+                $this->controls[DeviceMap::Gemili] = new \ZhMead\XmnkBikeControl\Gemili\Control($gateways[DeviceMap::Gemili], $bikeStatusSync, $isSyncCmd, $userRoleTag, $otherConfig, $isDev);
+                $this->controlKeys[] = DeviceMap::Gemili;
+            } catch (\Exception $exception) {
+                $this->controls[DeviceMap::Gemili] = $exception->getMessage();
+                $this->controlKeys[] = DeviceMap::Gemili;
+            }
+        }
 
         if (array_key_exists('numGatewayMaps', $configs)) $this->controlKeys = $configs['numGatewayMaps'];
 
