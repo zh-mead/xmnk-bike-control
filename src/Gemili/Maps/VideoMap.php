@@ -32,4 +32,6 @@ class VideoMap
 
     //超速
     const VOICE_SPEED = 14;
+    //警告
+    const VOICE_WARNING = 15;
 }

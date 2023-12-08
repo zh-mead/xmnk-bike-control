@@ -119,11 +119,11 @@ class Control implements ControlInterface
      * @return string
      * User: Mead
      */
-    private function getRandStr($length = 32)
+    private function getRandStr($length = 4)
     {
 //        $str = md5(time());
 //        $token = substr($str, 5, $length);
-        $token = rand(1000, 9999);
+        $token = rand(1000000, 9999999);
         return $token;
     }
 
@@ -275,9 +275,8 @@ class Control implements ControlInterface
      */
     public function outAreaPlayVideo($box_no, $isSync = -1)
     {
-        $cmd = CmdMap::CONTROL;
         $video_cmd = VideoMap::VOICE_SUPER_OPERATIONAL_AREA;
-        return $this->send($box_no, $cmd, $video_cmd, $isSync);
+        return $this->playVideo($box_no, $video_cmd, $isSync);
     }
 
     /**
