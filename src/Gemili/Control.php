@@ -121,9 +121,7 @@ class Control implements ControlInterface
      */
     private function getRandStr($length = 4)
     {
-//        $str = md5(time());
-//        $token = substr($str, 5, $length);
-        $token = rand(1000000, 9999999);
+        $token = rand(1000, 9999);
         return $token;
     }
 
