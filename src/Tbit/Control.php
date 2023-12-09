@@ -290,7 +290,7 @@ class Control implements ControlInterface
      * @return bool
      * User: Mead
      */
-    public function selectBikeStatus($box_no, $isSync = -1)
+    public function selectBikeStatus($box_no, $isSync = 1)
     {
         $select = ['DEVICESTATUS', 'PHASESTATUS'];
         $msg_id = $this->makeMsgId($box_no, $this->userRoleTag, CmdMap::CMD_REMOTE_SELECT);

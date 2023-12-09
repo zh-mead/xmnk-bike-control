@@ -391,7 +391,7 @@ class Control implements ControlInterface
      * User: Mead
      *??
      */
-    public function selectBikeStatus($box_no, $setting = [], $isSync = -1)
+    public function selectBikeStatus($box_no, $setting = [], $isSync = 1)
     {
         $cmd = CmdMap::COMMAND_QUERY_DEVICE_STATUS_INFO;
         $param = [];
