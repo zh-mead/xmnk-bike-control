@@ -29,7 +29,7 @@ class Control implements ControlInterface
 //
 //        $mqtt->connect($connectionSettings, true);
 //        $this->client = $mqtt;
-//        $this->groupName = $config['groupName'];
+        $this->groupName = $config['groupName'];
         $this->config = $config;
 
         $this->isSync = $isSync;
