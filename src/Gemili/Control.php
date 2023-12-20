@@ -14,21 +14,24 @@ class Control implements ControlInterface
     public $userRoleTag = 'user';
     public $isDev = false;
     public $isAutoBikeStatusSync = false;
-    private $client = '';
+    private $client = false;
     private $groupName = 'ebike';
     private $bikeStatusSync = false;
+    private $config = false;
 
     public function __construct($config, $bikeStatusSync, $isSync = false, $userRoleTag = UserRoleMap::USER, $otherConfig = [], $isDev = false)
     {
-        $nums = 1;
-        if (isset($config['client_nums'])) $nums = $config['client_nums'];
-        $mqtt = new \PhpMqtt\Client\MqttClient($config['host'], $config['port'], $config['client_id'] . '-' . rand(1, $nums));
-        $connectionSettings = new ConnectionSettings();
-        $connectionSettings = $connectionSettings->setUsername($config['username'])->setPassword($config['password']);
-
-        $mqtt->connect($connectionSettings, true);
-        $this->client = $mqtt;
+//        $nums = 1;
+//        if (isset($config['client_nums'])) $nums = $config['client_nums'];
+//        $mqtt = new \PhpMqtt\Client\MqttClient($config['host'], $config['port'], $config['client_id'] . '-' . rand(1, $nums));
+//        $connectionSettings = new ConnectionSettings();
+//        $connectionSettings = $connectionSettings->setUsername($config['username'])->setPassword($config['password']);
+//
+//        $mqtt->connect($connectionSettings, true);
+//        $this->client = $mqtt;
 //        $this->groupName = $config['groupName'];
+        $this->config = $config;
+
         $this->isSync = $isSync;
         $this->userRoleTag = $userRoleTag;
         $this->bikeStatusSync = $bikeStatusSync;
@@ -85,6 +88,19 @@ class Control implements ControlInterface
         $topic = "{$groupName}/{$box_no}/control";
         try {
             if ($this->isDev) var_dump($msg);
+
+            if (!$this->client || !$this->client->isConnected()) {
+                $config = $this->config;
+                $nums = 1;
+                if (isset($config['client_nums'])) $nums = $config['client_nums'];
+                $mqtt = new \PhpMqtt\Client\MqttClient($config['host'], $config['port'], $config['client_id'] . '-' . rand(1, $nums));
+                $connectionSettings = new ConnectionSettings();
+                $connectionSettings = $connectionSettings->setUsername($config['username'])->setPassword($config['password']);
+
+                $mqtt->connect($connectionSettings, true);
+                $this->client = $mqtt;
+            }
+
             $this->client->publish($topic, $msg);
             if ($isSync) {
                 //是否获取相应
@@ -463,11 +479,13 @@ class Control implements ControlInterface
      */
     public function selectBoxSetting($box_no, $setting = [])
     {
-//        $cmd = CmdMap::COMMAND_OBTAIN_CONTROLLER_DATA;
-//        $cmd = CmdMap::COMMAND_QUERY_INTERNAL_PARAMETERS;
-//        $param = [];
-//        return $this->send($box_no, $cmd, $param, true);
-        return false;
+        $cmd = CmdMap::CONTROL;
+        $param = [
+            'attr.qry' => [
+                "seq" => 1,
+            ]
+        ];
+        return $this->send($box_no, $cmd, $param, true);
     }
 
     /**
