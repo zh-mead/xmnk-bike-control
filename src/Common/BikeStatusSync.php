@@ -281,7 +281,7 @@ class BikeStatusSync
      */
     public function byBoxNoGetHelmetStatus($box_no)
     {
-        $status = self::$redis->get(BaseMap::CACHE_KEY . "HelmetUnlockStatus:{$box_no}");
+        $status = self::$redis->get(BaseMap::CACHE_KEY . ":HelmetUnlockStatus:{$box_no}");
         if (!$status) {
             $location = [
                 'time' => 0,
