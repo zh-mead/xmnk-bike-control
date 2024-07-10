@@ -229,7 +229,7 @@ class Control implements ControlInterface
      */
     public function selectHelmetStatus($box_no)
     {
-        $location = $this->bikeStatusSync->byBoxNoGetLocation($box_no);
+        $location = $this->bikeStatusSync->byBoxNoGetHelmetStatus($box_no);
         if (isset($location['isHelmetUnlock'])) return $location['isHelmetUnlock'];
         return 0;
     }

@@ -44,7 +44,7 @@ class Control implements ControlInterface
         $cmd = CmdMap::COMMAND_CONTROL_VOICE_BROADCAST;
         $param = [
             'idx' => VideoMap::CAR_SEARCH_SOUND,
-            'volume' => 70
+            'volume' => 100
         ];
         return $this->send($box_no, $cmd, $param, $isSync);
     }
@@ -63,7 +63,7 @@ class Control implements ControlInterface
         $cmd = CmdMap::COMMAND_STARTORSTOP_VEHICLE;
         $param = [
             'acc' => 1,
-            'volume' => 70
+            'volume' => 100
         ];
         return $this->send($box_no, $cmd, $param, $isSync);
     }
@@ -85,7 +85,7 @@ class Control implements ControlInterface
         $cmd = CmdMap::COMMAND_ANTITHEFT_SWITCH;
         $param = [
             'defend' => 1,
-            'volume' => 70
+            'volume' => 100
         ];
         return $this->send($box_no, $cmd, $param, $isSync);
     }

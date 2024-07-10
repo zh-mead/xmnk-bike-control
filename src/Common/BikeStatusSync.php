@@ -275,6 +275,25 @@ class BikeStatusSync
     }
 
     /**
+     * 获取头盔的状态
+     * @param $box_no
+     * @return int[]|mixed
+     */
+    public function byBoxNoGetHelmetStatus($box_no)
+    {
+        $status = self::$redis->get(BaseMap::CACHE_KEY . "HelmetUnlockStatus:{$box_no}");
+        if (!$status) {
+            $location = [
+                'time' => 0,
+                'isHelmetUnlock' => 0
+            ];
+        } else {
+            $location = $this->decodeData($status);
+        }
+        return $location;
+    }
+
+    /**
      * 统计骑行的数量
      * @return void
      */
