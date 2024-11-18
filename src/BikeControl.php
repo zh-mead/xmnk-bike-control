@@ -125,7 +125,7 @@ class BikeControl
         }
         if (array_key_exists(DeviceMap::WeiKeMu, $gateways)) {
             try {
-                $this->controls[DeviceMap::WeiKeMu] = new \ZhMead\XmnkBikeControl\Xiaoan\Control($gateways[DeviceMap::WeiKeMu], $bikeStatusSync, $isSyncCmd, $userRoleTag, $otherConfig, $isDev);
+                $this->controls[DeviceMap::WeiKeMu] = new \ZhMead\XmnkBikeControl\Weikemu\Control($gateways[DeviceMap::WeiKeMu], $bikeStatusSync, $isSyncCmd, $userRoleTag, $otherConfig, $isDev);
                 $this->controlKeys[] = DeviceMap::WeiKeMu;
             } catch (\Exception $exception) {
                 $this->controls[DeviceMap::WeiKeMu] = $exception->getMessage();
