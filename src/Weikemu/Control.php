@@ -552,9 +552,18 @@ class Control implements ControlInterface
      * @return bool
      * User: Mead
      */
-    public function selectBikeStatus($box_no, $isSync = 1)
+    public function selectBikeStatus($box_no, $isSync = -1)
     {
-        return $this->selectBoxSetting($box_no, '00001000');
+        $str2 = '00001000';
+        $cmd = "2B";
+        $msgId = self::getMsgId();
+        $body = [
+            $msgId,
+            str_pad(base_convert($str2, 2, 16), 2, 0, STR_PAD_LEFT)
+        ];
+
+        $send_msg = self::makeSendMsg($cmd, $body);
+        return $this->send($box_no, $send_msg, $isSync, $msgId);
     }
 
     /**
@@ -642,8 +651,16 @@ class Control implements ControlInterface
         //todo:删除ridis位置缓存
         $this->delRedisCache($box_no, 'update_bike_location');
 
-        //00000001
-        return $this->selectBoxSetting($box_no, '00000001');
+        $str2 = '00000001';
+        $cmd = "2B";
+        $msgId = self::getMsgId();
+        $body = [
+            $msgId,
+            str_pad(base_convert($str2, 2, 16), 2, 0, STR_PAD_LEFT)
+        ];
+        $send_msg = self::makeSendMsg($cmd, $body);
+
+        return $this->send($box_no, $send_msg, $isSync, $msgId);
     }
 
     /**
