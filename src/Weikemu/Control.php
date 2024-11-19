@@ -212,7 +212,7 @@ class Control implements ControlInterface
     private function send($box_no, $msg, $isSync = -1, $msgId = false)
     {
         Gateway::$registerAddress = $this->registerAddress;
-//        if (!Gateway::isUidOnline($box_no)) return 0;
+        if (!Gateway::isUidOnline($box_no)) return 0;
 
         if ($isSync === -1) {
             $isSync = $this->isSync;
@@ -391,8 +391,6 @@ class Control implements ControlInterface
 
         $send_msg = self::makeSendMsg($cmd, $body);
 
-        //todo:设置 token
-//        ("cache:open_battery:{$box_no}", 300, 1);
         return $this->send($box_no, $send_msg, $isSync, $msg_id);
     }
 
