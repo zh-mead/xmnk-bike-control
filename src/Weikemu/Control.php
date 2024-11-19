@@ -93,9 +93,9 @@ class Control implements ControlInterface
             $control,// 01 电门开启; 00 电门关闭(关闭防盗开关)；02 电门关闭(开启防盗开关)；
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msg_id);
 
-        return $this->send($box_no, $send_msg, false);
+        return $this->send($box_no, $send_msg, false, $msg_id);
     }
 
     /**
@@ -135,6 +135,7 @@ class Control implements ControlInterface
         if ($msg_id === false) {
             $msg_id = self::getMsgId();
         }
+
         $header = [
             $cmd,
             $msg_id,
@@ -271,12 +272,13 @@ class Control implements ControlInterface
     private function orderStatus($box_no, $control)
     {
         $cmd = "35";
+        $msgId = self::getMsgId();
         $body = [
-            self::getMsgId(),
+            $msgId,
             $control,
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msgId);
 
         return $this->send($box_no, $send_msg, false);
     }
@@ -370,7 +372,7 @@ class Control implements ControlInterface
             'FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF',
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msgId);
         return $this->send($box_no, $send_msg, $isSync, $msgId);
     }
 
@@ -389,7 +391,7 @@ class Control implements ControlInterface
             '01',
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msg_id);
 
         return $this->send($box_no, $send_msg, $isSync, $msg_id);
     }
@@ -562,7 +564,7 @@ class Control implements ControlInterface
             str_pad(base_convert($str2, 2, 16), 2, 0, STR_PAD_LEFT)
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msgId);
         return $this->send($box_no, $send_msg, $isSync, $msgId);
     }
 
@@ -582,7 +584,7 @@ class Control implements ControlInterface
             str_pad(base_convert($str2, 2, 16), 2, 0, STR_PAD_LEFT)
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msgId);
 
         return $this->send($box_no, $send_msg, true, $msgId);
     }
@@ -606,7 +608,7 @@ class Control implements ControlInterface
             'FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF', // 重启升级文件名称
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msg_id);
 
         return $this->send($box_no, $send_msg, $isSync, $msg_id);
     }
@@ -658,7 +660,7 @@ class Control implements ControlInterface
             $msgId,
             str_pad(base_convert($str2, 2, 16), 2, 0, STR_PAD_LEFT)
         ];
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msgId);
 
         return $this->send($box_no, $send_msg, $isSync, $msgId);
     }
@@ -714,7 +716,7 @@ class Control implements ControlInterface
             'FF FF FF FF FF FF'
         ];
 
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msg_id);
         return $this->send($box_no, $send_msg, $isSync, $msg_id);
     }
 
@@ -758,7 +760,7 @@ class Control implements ControlInterface
             str_pad(base_convert($port, 10, 16), 4, 0, STR_PAD_LEFT),
             bin2hex($url)
         ];
-        $send_msg = self::makeSendMsg($cmd, $body);
+        $send_msg = self::makeSendMsg($cmd, $body, $msg_id);
         return $this->send($box_no, $send_msg, true);
     }
 
