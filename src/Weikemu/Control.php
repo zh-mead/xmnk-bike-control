@@ -232,7 +232,7 @@ class Control implements ControlInterface
                 for ($i = 0; $i <= 30; $i++) {
                     sleep(1);
                     if ($this->isDev) var_dump($i);
-                    $data = $this->bikeStatusSync->getBikeBoxInfo(':' . $msgId);
+                    $data = $this->bikeStatusSync->getBikeBoxInfo(":{$box_no}:{$msgId}");
                     if ($data) {
                         $response = $this->decodeData($data);
                         break;
