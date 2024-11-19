@@ -53,7 +53,7 @@ class Control implements ControlInterface
      */
     public function bell($box_no, $isSync = -1)
     {
-        return $this->playVoice($box_no, VideoMap::VIDEO_BIKE_HERE, $isSync);
+        return $this->playVideo($box_no, VideoMap::VIDEO_BIKE_HERE, $isSync);
     }
 
     /**
@@ -69,7 +69,7 @@ class Control implements ControlInterface
         $re = $this->electricSwitchControl($box_no, '01');
         if ($re) {
             $this->orderStatus($box_no, '01');
-            $this->playVoice($box_no, VideoMap::VIDEO_OPEN_LOCK);
+            $this->playVideo($box_no, VideoMap::VIDEO_OPEN_LOCK);
             return true;
         }
         return false;
@@ -297,7 +297,7 @@ class Control implements ControlInterface
         $re = $this->electricSwitchControl($box_no, '02');
         if ($re) {
             $this->orderStatus($box_no, '00');
-            $this->playVoice($box_no, VideoMap::VIDEO_RETURN_BIKE);
+            $this->playVideo($box_no, VideoMap::VIDEO_RETURN_BIKE);
             return true;
         }
         return false;
@@ -325,7 +325,7 @@ class Control implements ControlInterface
 
         $re = $this->electricSwitchControl($box_no, '02');
         if ($re) {
-            $this->playVoice($box_no, VideoMap::VIDEO_FIND_BIKE);
+            $this->playVideo($box_no, VideoMap::VIDEO_FIND_BIKE);
             return true;
         }
         return false;
