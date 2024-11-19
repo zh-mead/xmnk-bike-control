@@ -565,6 +565,7 @@ class Control implements ControlInterface
      */
     public function selectBoxSetting($box_no, $str2 = '00000100')
     {
+        if (is_array($str2)) $str2 = '00000100';
         $cmd = "2B";
         $msgId = self::getMsgId();
         $body = [
