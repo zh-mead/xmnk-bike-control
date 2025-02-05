@@ -224,6 +224,7 @@ class BikeStatusSync
                     'lng' => 0,
                     'spike' => '',
                     'time' => 0,
+                    'gpsNums' => 0,
                     'isHelmetUnlock' => 0
                 ];
             } else {
@@ -238,6 +239,7 @@ class BikeStatusSync
                     'lng' => 0,
                     'mileage' => $location['mileage'],
                     'time' => 0,
+                    'gpsNums' => 0,
                     'isHelmetUnlock' => 0
                 ];
             } else {
@@ -249,6 +251,7 @@ class BikeStatusSync
                     'lng' => $upLocation['lng'],
                     'mileage' => $location['mileage'],
                     'spike' => $upLocation['spike'],
+                    'gpsNums' => isset($upLocation['gpsNums']) ? $upLocation['gpsNums'] : 0,
                     'time' => $upLocation['time'],
                     'isHelmetUnlock' => $upLocation['isHelmetUnlock']
                 ];
@@ -260,6 +263,7 @@ class BikeStatusSync
                 'mileage' => $location['mileage'],
                 'spike' => $upLocation['spike'],
                 'time' => $location['time'],
+                'gpsNums' => isset($location['gpsNums']) ? $location['gpsNums'] : 0,
                 'isHelmetUnlock' => $location['isHelmetUnlock']
             ];
         } catch (\Exception $exception) {
@@ -268,6 +272,7 @@ class BikeStatusSync
                 'lng' => 0,
                 'mileage' => 0,
                 'spike' => 0,
+                'gpsNums' => 0,
                 'time' => 0,
                 'isHelmetUnlock' => 0
             ];
