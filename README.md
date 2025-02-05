@@ -11,6 +11,8 @@ $ composer require zh-mead/xmnk-bike-control -vvv
 
 ## Usage
 
+* 20250205：新增获取定位卫星数量
+
 TODO
 
 ## Contributing
